@@ -1,0 +1,26 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_PATH: /app/data/worker.db
+      INVOICES_DIR: /app/data/invoices
+    volumes:
+      - worker-data:/app/data
+    # The API seeds the sample company environment on first start if the database is empty.
+
+  ui:
+    build: .
+    command: ["streamlit", "run", "frontend/streamlit_app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+    ports:
+      - "8501:8501"
+    environment:
+      API_URL: http://api:8000
+    depends_on:
+      - api
+
+volumes:
+  worker-data:

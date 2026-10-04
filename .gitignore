@@ -1,0 +1,25 @@
+# secrets
+.env
+*.key
+
+# python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# runtime data (recreated by scripts/seed_database.py)
+data/*.db
+data/*.db-journal
+data/invoices/
+logs/
+*.log
+
+# tooling / temp
+.streamlit/secrets.toml
+.DS_Store
+*.tmp
+.idea/
+.vscode/
